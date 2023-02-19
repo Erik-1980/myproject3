@@ -1,0 +1,18 @@
+import ReactDOM from 'react-dom/client';
+import App from './App';
+import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import Basket from './Basket';
+import About from './About';
+import Catalog from './Catalog';
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+    <BrowserRouter>
+    <Routes>
+      <Route path="/" element={<App />} />
+      <Route path="/basket" element={<Basket />} />
+      <Route path="/about" element={<About />} />
+      <Route path="/catalog" element={<Catalog />} />
+    </Routes>
+    </BrowserRouter>
+);

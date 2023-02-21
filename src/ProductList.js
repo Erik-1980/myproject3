@@ -8,6 +8,7 @@ export default function ProductList(props) {
         {products.map((product) => (
           <Product
             key={product.id}
+            quantity={product.quantity}
             name={product.name}
             image={product.image}
             price={product.price}

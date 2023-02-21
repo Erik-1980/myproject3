@@ -1,5 +1,6 @@
 export default function Product(props) {
-    const { image, name, model, screen_size, screen_type, price, onAddToCart } = props;
+    
+  const { image, name, model, screen_size, screen_type, price, quantity, onAddToCart } = props;
   
     return (
       <div className="product">
@@ -9,7 +10,7 @@ export default function Product(props) {
         <p>screen size: {screen_size}</p>
         <p>screen type: {screen_type}</p>
         <p>price: ${price}</p>
-        <button className="button-buy" onClick={onAddToCart}>Add to Cart</button>
+        <button className="button-add-remove" onClick={onAddToCart}>Add to Cart</button>
       </div>
     );
   }

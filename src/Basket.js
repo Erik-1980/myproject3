@@ -4,7 +4,7 @@ import Cart from './Cart';
 import { useState } from 'react';
 
 export default function Basket () {
-    const [remove, setRemove] = useState();
+    const [remove, setRemove] = useState([]);
 
 const storedData = window.localStorage.getItem('cartItems');
     let cartItems;
@@ -13,7 +13,6 @@ const storedData = window.localStorage.getItem('cartItems');
         } else {
         cartItems = [];
         };
-        console.log(cartItems)
     
 const uniqueItems = {};
 cartItems.forEach(item => {
@@ -32,23 +31,26 @@ function removeFromCart(id) {
     const updatedCartItems = basketItems.map(item => {
       if (item.id === id) {
         item.quantity -= 1;
-        if (item.quantity === 0) {
+        if (item.quantity < 1) {
           return null;
         }
       }
       return item;
     }).filter(item => item !== null);
-  
     window.localStorage.setItem('cartItems', JSON.stringify(updatedCartItems));
-    setRemove(id);
-  };
+    setRemove(updatedCartItems);
+  }
+
+  function productBuy() {
+  window.location.href = "https://bepaid.by/sites/default/files/-stranica-min.png";
+}
       return (
         <>
         <Header />
         <div className='total'><p>Total: ${total}</p></div>
         <div className='product-list'>
         {basketItems.map((product) => (
-        <Cart key = {product.id} name= {product.name} model= {product.model} screen_size= {product.screen_size} image= {product.image}  price= {product.price} screen_type= {product.screen_type} quantity={product.quantity} removeFromCart= {() => removeFromCart(product.id)}/>))}
+        <Cart key = {product.id} name= {product.name} model= {product.model} screen_size= {product.screen_size} image= {product.image}  price= {product.price} screen_type= {product.screen_type} quantity={product.quantity} removeFromCart= {() => removeFromCart(product.id)} productBuy={() => productBuy()}/>)) }
         </div>
         <Footer />
         </>

@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 export default function Header() {
     const storedData = window.localStorage.getItem('cartItems');
     const cartItems = JSON.parse(storedData);
-    let number_of_products = cartItems.length;
+    let number_of_products = cartItems?.length;
     return (
         <header>
             <div className="header">

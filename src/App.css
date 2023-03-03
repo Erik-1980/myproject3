@@ -107,7 +107,8 @@ a {
   text-shadow:  #2e22b3 7px 7px 3px;
 }
 .basket {
-  margin-left: 950px;
+  margin-left: 1240px;
+  margin-top: 50px;
 }
 .basket p {
   margin-left: 1270px;
@@ -150,4 +151,13 @@ a {
   grid-column-gap: 1%;
     grid-row-gap: 1%;
     margin-left: 2%;
+} 
+.input-usename {
+  margin-left: 600px;
+}
+.input-password {
+  margin-left: 20px
+}
+.logIn {
+  margin-left: 20px;
 }

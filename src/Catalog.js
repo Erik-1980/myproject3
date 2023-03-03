@@ -1,8 +1,7 @@
 import Footer from './Footer';
 import Header from './Header';
-import { useState } from "react";
+import { useState, useEffect, useMemo } from "react";
 import ProductList from "./ProductList";
-import {products} from "./Data/data";
 
 export default function Catalog (){
     const [cartItems, setCartItems] = useState(JSON.parse(window.localStorage.getItem('cartItems')) || []);
@@ -14,20 +13,25 @@ export default function Catalog (){
         window.localStorage.setItem('cartItems', JSON.stringify(newCartItems));
     }
     const [brand, setBrand] = useState([]);
-    function brandSamsung () {
-      return (setBrand(products.SamsungTV))};
-    function brandSony () {
-       setBrand(products.SonyTV)};
-    function brandLG () {
-       setBrand(products.LGTV)}      
-      
+    useEffect(()=> {
+            fetch('http://localhost:5000')
+            .then(res => res.json())
+            .then(data => setBrand(data))
+        }, [])
+    const [brandTable, setBrandTable] = useState(0)
+
+    function brandChange (brandTable) {
+       setBrandTable(brandTable)};
+       
+       const filteredBrand = useMemo(() => brand.filter(obj => obj.brand_table_id === brandTable), [brand, brandTable]);
+  
     return (
         <>
         <Header />
-         <button className="button-change" onClick={brandSamsung}>Samsung</button>
-         <button className="button-change" onClick={brandSony}>Sony</button>
-         <button className="button-change" onClick={brandLG}>LG</button>
-        <ProductList products = {brand} onAddToCart = {addToCart}/>
+        <button className="button-change" onClick={() => brandChange(1)}>Samsung</button>  {/*?????*/}
+        <button className="button-change" onClick={() => brandChange(2)}>Sony</button>
+        <button className="button-change" onClick={() => brandChange(3)}>LG</button>
+        <ProductList products = {filteredBrand} onAddToCart = {addToCart}/>
         <div style={{marginLeft:'100px', marginTop:'40px'}}><img src='./image/mainpage4.jpeg' width='90%'/></div>
         <Footer />
         </>
